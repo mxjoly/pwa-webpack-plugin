@@ -1,6 +1,6 @@
 {
   "name": "@mxjoly/pwa-webpack-plugin",
-  "version": "1.0.43",
+  "version": "1.1.0",
   "description": "A webpack plugin that generates your icons and metadata for your progressive web app.",
   "main": "dist/index.js",
   "author": "mxjoly <maxime.joly2808@gmail.com>",
@@ -10,14 +10,11 @@
     "pwa",
     "favicons"
   ],
-  "directories": {
-    "lib": "lib"
-  },
   "repository": "https://github.com/mxjoly/pwa-webpack-plugin.git",
   "bugs": "https://github.com/mxjoly/pwa-webpack-plugin/issues",
   "homepage": "https://github.com/mxjoly/pwa-webpack-plugin#readme",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && ncp ./lib/mask.png ./dist/mask.png",
     "deps:check": "npm-check-updates",
     "deps:upgrade": "ncu -i"
   },
@@ -36,6 +33,7 @@
     "@types/node": "^14.11.8",
     "@types/prettier": "^2.1.2",
     "@types/sharp": "^0.26.0",
+    "ncp": "^2.0.0",
     "npm-check-updates": "^9.0.4",
     "typescript": "^4.0.3"
   }

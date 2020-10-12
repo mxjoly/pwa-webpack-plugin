@@ -11,8 +11,8 @@ import webpack, { Compiler } from 'webpack';
 import { adjustSvg } from './utils';
 import { IconGroup, IconProps, PluginOpts } from './types';
 
-const HtmlWebpackPlugin = safeRequire('../../html-webpack-plugin');
-const iconsMap = require('./lib/icons.json');
+const HtmlWebpackPlugin = safeRequire('../../../html-webpack-plugin');
+const iconsMap = require('./icons.json');
 
 // Device              Portrait size      Landscape size     Screen size        Pixel ratio
 // iPhone SE            640px × 1136px    1136px ×  640px     320px ×  568px    2
@@ -241,34 +241,29 @@ class PWAPlugin {
                     opacityDest: props.transparent ? 0 : 1, // Transparency of the background
                   });
 
-                  Jimp.read(
-                    path.join(process.cwd(), '/lib/mask.png'),
-                    (err, mask) => {
-                      if (err) reject(err);
+                  Jimp.read(path.join(__dirname, 'mask.png'), (err, mask) => {
+                    if (err) reject(err);
 
-                      // https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/
-                      if (props.mask === true) {
-                        mask.resize(width, height);
-                        background.mask(mask, 0, 0);
-                      }
-
-                      if (props.shadow === true) {
-                        background.shadow({
-                          size: 1.02,
-                          x: 0,
-                          y: 0,
-                          opacity: 0.5,
-                          blur: 3,
-                        });
-                      }
-
-                      background
-                        .getBufferAsync(Jimp.MIME_PNG)
-                        .then((buffer) => {
-                          resolve([relativePath, buffer]);
-                        });
+                    // https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/
+                    if (props.mask === true) {
+                      mask.resize(width, height);
+                      background.mask(mask, 0, 0);
                     }
-                  );
+
+                    if (props.shadow === true) {
+                      background.shadow({
+                        size: 1.02,
+                        x: 0,
+                        y: 0,
+                        opacity: 0.5,
+                        blur: 3,
+                      });
+                    }
+
+                    background.getBufferAsync(Jimp.MIME_PNG).then((buffer) => {
+                      resolve([relativePath, buffer]);
+                    });
+                  });
                 }
               );
             });
@@ -375,8 +370,10 @@ class PWAPlugin {
     } = this.options;
 
     if (!HtmlWebpackPlugin) {
-      console.warn(
-        'You do not have installed html-webpack-plugin in your project. The metadata cannot be generated.'
+      console.log(
+        chalk.yellowBright(
+          'You do not have installed html-webpack-plugin in your project. The metadata cannot be generated.'
+        )
       );
       return;
     }
