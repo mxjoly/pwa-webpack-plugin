@@ -4,13 +4,14 @@ import chalk from 'chalk';
 import prettier from 'prettier';
 import sharp from 'sharp';
 import Jimp from 'jimp';
+import safeRequire from 'safe-require';
 import merge from 'lodash/merge';
 import webpack, { Compiler } from 'webpack';
 
 import { adjustSvg } from './utils';
 import { IconGroup, IconProps, PluginOpts } from './types';
 
-const HtmlWebpackPlugin = require('safe-require')('../../html-webpack-plugin');
+const HtmlWebpackPlugin = safeRequire('../../html-webpack-plugin');
 const iconsMap = require('./lib/icons.json');
 
 // Device              Portrait size      Landscape size     Screen size        Pixel ratio
