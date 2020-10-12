@@ -110,11 +110,11 @@ const { iconsMap } = require('@mxjoly/pwa-webpack-plugin');
 
 ### publicPath
 
-The publicPath used for script and link tags. By default `"/"`;
+The publicPath used for script and link tags. By default `"/"`
 
 ### emitMetadata
 
-Used to inject the metadata in your html template file.
+Used to inject the metadata in your html template file. By default `true`
 
 ### manifest
 
@@ -160,11 +160,11 @@ The ouput path of the icons. By default `"/assets/icons"`.
 
 #### backgroundColor
 
-The background color used for the splash icons.
+The background color used for the splash icons. By default `"#ffffff"`.
 
 #### themeColor
 
-The theme color for your icons.
+The theme color for your icons. By default `"#ffffff"`.
 
 #### use
 
