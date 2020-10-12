@@ -20,7 +20,7 @@ This package must be used with [html-webpack-plugin](https://www.npmjs.com/packa
 
 This plugin :
 
-- Generates all icons for your application to be supported all platforms (android, safari, apple, coast, windows)
+- Generates all icons for your application to be supported with all platforms (android, safari, apple, coast, windows)
 - Creates the `manifest.json`
 - Create the `browserconfig.xml`
 - Generates and injects the metadata to the html template file (with [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin))
