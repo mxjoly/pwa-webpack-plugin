@@ -10,7 +10,7 @@
 
 ## Installation
 
-`npm install pwa-webpack-plugin --save-dev`
+`npm install @mxjoly/pwa-webpack-plugin --save-dev`
 
 This package must be used with [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin) and [webpack-manifest-plugin](https://www.npmjs.com/package/webpack-manifest-plugin) :
 
@@ -55,7 +55,7 @@ This plugin :
 const fs = require('fs');
 const HtmlPlugin = require('html-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const PWAPlugin = require('pwa-webpack-plugin');
+const PWAPlugin = require('@mxjoly/pwa-webpack-plugin');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const faviconPath = path.resolve(appDirectory, 'src/favicon.svg');
@@ -93,6 +93,14 @@ module.exports = {
     }),
   ],
 };
+```
+
+## Icons configuration
+
+You can import the icons map config used by the plugin.
+
+```javascript
+const { iconsMap } = require('@mxjoly/pwa-webpack-plugin');
 ```
 
 ## Options

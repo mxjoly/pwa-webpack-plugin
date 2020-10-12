@@ -12,7 +12,7 @@ import { adjustSvg } from './utils';
 import { IconGroup, IconProps, PluginOpts } from './types';
 
 const HtmlWebpackPlugin = safeRequire('../../../html-webpack-plugin');
-const iconsMap = require('./icons.json');
+export const iconsMap = require('./icons.json');
 
 // Device              Portrait size      Landscape size     Screen size        Pixel ratio
 // iPhone SE            640px × 1136px    1136px ×  640px     320px ×  568px    2

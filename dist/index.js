@@ -39,6 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.iconsMap = void 0;
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
 var chalk_1 = __importDefault(require("chalk"));
@@ -49,7 +50,7 @@ var safe_require_1 = __importDefault(require("safe-require"));
 var merge_1 = __importDefault(require("lodash/merge"));
 var utils_1 = require("./utils");
 var HtmlWebpackPlugin = safe_require_1.default('../../../html-webpack-plugin');
-var iconsMap = require('./icons.json');
+exports.iconsMap = require('./icons.json');
 // Device              Portrait size      Landscape size     Screen size        Pixel ratio
 // iPhone SE            640px × 1136px    1136px ×  640px     320px ×  568px    2
 // iPhone 8             750px × 1334px    1334px ×  750px     375px ×  667px    2
@@ -118,7 +119,7 @@ var PWAPlugin = /** @class */ (function () {
         // Manifest relative path from the public path
         var outputFile = path_1.default.join(outputManifest, filename).slice(1); // remove the first slash
         // Add the icons
-        Object.entries(iconsMap.android).forEach(function (_a) {
+        Object.entries(exports.iconsMap.android).forEach(function (_a) {
             var iconName = _a[0], props = _a[1];
             options.icons.push(Object.assign({
                 src: path_1.default.join(publicPath, outputIcons, iconName),
@@ -165,7 +166,7 @@ var PWAPlugin = /** @class */ (function () {
     PWAPlugin.prototype.generateGroupIcons = function (buffer, group) {
         var _this = this;
         var _a = this.options.icons, favicon = _a.favicon, outputPath = _a.outputPath, backgroundColor = _a.backgroundColor, themeColor = _a.themeColor;
-        return Object.entries(iconsMap[group]).map(function (_a) {
+        return Object.entries(exports.iconsMap[group]).map(function (_a) {
             var iconName = _a[0], props = _a[1];
             var relativePath = path_1.default.join(outputPath, iconName);
             if (String(props.type) === 'image/svg+xml') {
@@ -326,7 +327,7 @@ var PWAPlugin = /** @class */ (function () {
             Object.keys(use)
                 .filter(function (group) { return use[group] === true; })
                 .forEach(function (group) {
-                var groupLinks = Object.entries(iconsMap[group])
+                var groupLinks = Object.entries(exports.iconsMap[group])
                     .filter(function (_a) {
                     var props = _a[1];
                     return props.emitTag;

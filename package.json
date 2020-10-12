@@ -1,6 +1,6 @@
 {
   "name": "@mxjoly/pwa-webpack-plugin",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A webpack plugin that generates your icons and metadata for your progressive web app.",
   "main": "dist/index.js",
   "author": "mxjoly <maxime.joly2808@gmail.com>",
