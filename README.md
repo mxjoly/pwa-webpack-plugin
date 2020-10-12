@@ -1,3 +1,6 @@
+[![License](https://img.shields.io/github/license/mxjoly/pwa-webpack-plugin.svg)](https://github.com/mxjoly/pwa-webpack-plugin)
+[![devDependency Status](https://img.shields.io/david/dev/mxjoly/pwa-webpack-plugin.svg)](https://david-dm.org/mxjoly/pwa-webpack-plugin#info=devDependencies)
+
 # PWA Webpack Plugin
 
 ## Summary
