@@ -75,7 +75,7 @@ module.exports = {
         favicon: faviconPath,
         outputPath: 'assets/icons',
         backgroundColor: '#ffffff',
-        themeColor: '#ffffff,
+        themeColor: '#ffffff',
         use: {
           favicons: true,
           android: true,
