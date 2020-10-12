@@ -168,7 +168,7 @@ The theme color for your icons. By default `"#ffffff"`.
 
 #### use
 
-An object with the type icons to generated :
+An object with the icons type to generate :
 
 | Key            | Default | Description                                                    |
 | -------------- | ------- | -------------------------------------------------------------- |
