@@ -1,5 +1,11 @@
 # packages
-node_modules
+node_modules/**
+!node_modules/chalk
+!node_modules/safe-require
+!node_modules/jimp
+!node_modules/lodash
+!node_modules/sharp
+!node_modules/xml2js
 
 # build
 dist

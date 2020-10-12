@@ -10,6 +10,12 @@
     "pwa",
     "favicons"
   ],
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": "https://github.com/mxjoly/pwa-webpack-plugin.git",
+  "bugs": "https://github.com/mxjoly/pwa-webpack-plugin/issues",
+  "homepage": "https://github.com/mxjoly/pwa-webpack-plugin#readme",
   "scripts": {
     "build": "tsc",
     "deps:check": "npm-check-updates",
@@ -17,7 +23,6 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
-    "html-webpack-plugin": "^4.5.0",
     "jimp": "^0.16.1",
     "lodash": "^4.17.20",
     "sharp": "^0.26.1",
@@ -33,16 +38,5 @@
     "prettier": "^2.1.2",
     "safe-require": "^1.0.4",
     "typescript": "^4.0.3"
-  },
-  "directories": {
-    "lib": "lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mxjoly/pwa-webpack-plugin.git"
-  },
-  "bugs": {
-    "url": "https://github.com/mxjoly/pwa-webpack-plugin/issues"
-  },
-  "homepage": "https://github.com/mxjoly/pwa-webpack-plugin#readme"
+  }
 }
