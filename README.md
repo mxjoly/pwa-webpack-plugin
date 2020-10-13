@@ -9,6 +9,7 @@
 - [Features](#features)
 - [Usage](#usage)
 - [Options](#options)
+- [Metada](#metadata)
 - [License](#license)
 
 ## Installation
@@ -27,114 +28,6 @@ This plugin :
 - Creates the `manifest.json`
 - Create the `browserconfig.xml`
 - Generates and injects the metadata to the html template file (with [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin))
-
-The generated metadata are the followings tags :
-
-```html
-<link rel="manifest" href="/manifest.json" />
-<meta name="msapplication-config" href="/browserconfig.xml" />
-<link
-  rel="icon"
-  type="image/png"
-  href="/assets/icons/icons/favicon-16x16.png"
-  sizes="16x16"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  href="/assets/icons/icons/favicon-32x32.png"
-  sizes="32x32"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  href="/assets/icons/icons/favicon-48x48.png"
-  sizes="48x48"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  href="/assets/icons/icons/favicon-96x96.png"
-  sizes="96x96"
-/>
-<link
-  rel="apple-touch-icon"
-  type="image/png"
-  href="/assets/icons/icons/apple-touch-icon.png"
-  sizes="180x180"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/iphone5-splash.png"
-  media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/iphone6-splash.png"
-  media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/iphoneplus-splash.png"
-  media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/iphonex-splash.png"
-  media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/iphonexr-splash.png"
-  media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/iphonexsmax-splash.png"
-  media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/ipad-splash.png"
-  media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/ipadpro1-splash.png"
-  media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/ipadpro2-splash.png"
-  media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
-/>
-<link
-  rel="apple-touch-startup-image"
-  type="image/png"
-  href="/assets/icons/icons/ipadpro3-splash.png"
-  media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
-/>
-<link
-  rel="mask-icon"
-  type="image/svg+xml"
-  href="/assets/icons/icons/safari-pinned-tab.svg"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  href="/assets/icons/icons/coast-228x228.png"
-  sizes="228x228"
-/>
-```
 
 ## Usage
 
@@ -288,6 +181,116 @@ An object with the icon types to generate :
 | `windows`      | `true`  | The msapplication tiles for `browserconfig.xml`.               |
 | `safari`       | `true`  | The mask icon used with safari.                                |
 | `coast`        | `true`  | The specific icons used in coast.                              |
+
+## Metadata
+
+The generated metadata are the following tags :
+
+```html
+<link rel="manifest" href="/manifest.json" />
+<meta name="msapplication-config" href="/browserconfig.xml" />
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/favicon-16x16.png"
+  sizes="16x16"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/favicon-32x32.png"
+  sizes="32x32"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/favicon-48x48.png"
+  sizes="48x48"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/favicon-96x96.png"
+  sizes="96x96"
+/>
+<link
+  rel="apple-touch-icon"
+  type="image/png"
+  href="/assets/icons/icons/apple-touch-icon.png"
+  sizes="180x180"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphone5-splash.png"
+  media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphone6-splash.png"
+  media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphoneplus-splash.png"
+  media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphonex-splash.png"
+  media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphonexr-splash.png"
+  media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphonexsmax-splash.png"
+  media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/ipad-splash.png"
+  media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/ipadpro1-splash.png"
+  media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/ipadpro2-splash.png"
+  media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/ipadpro3-splash.png"
+  media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="mask-icon"
+  type="image/svg+xml"
+  href="/assets/icons/icons/safari-pinned-tab.svg"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/coast-228x228.png"
+  sizes="228x228"
+/>
+```
 
 ## License
 
