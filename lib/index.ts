@@ -5,14 +5,29 @@ import prettier from 'prettier';
 import sharp from 'sharp';
 import Jimp from 'jimp';
 import safeRequire from 'safe-require';
-import merge from 'lodash/merge';
 import webpack, { Compiler } from 'webpack';
 
-import { adjustSvg } from './utils';
+import { adjustSvg, deepMerge } from './utils';
 import { IconGroup, IconProps, PluginOpts } from './types';
 
 const HtmlWebpackPlugin = safeRequire('../../../html-webpack-plugin');
 export const iconsMap = require('./icons.json');
+
+// Default manifest options
+const defaultManifest = {
+  lang: 'en',
+  dir: 'auto',
+  name: null,
+  short_name: null,
+  description: null,
+  icons: [],
+  scope: '/',
+  start_url: '/?utm_source=homescreen',
+  display: 'standalone',
+  orientation: 'any',
+  theme_color: '#ffffff',
+  background_color: '#ffffff',
+};
 
 // Device              Portrait size      Landscape size     Screen size        Pixel ratio
 // iPhone SE            640px × 1136px    1136px ×  640px     320px ×  568px    2
@@ -35,36 +50,22 @@ export const iconsMap = require('./icons.json');
 
 class PWAPlugin {
   options: PluginOpts;
-  _emit: boolean;
+  isRunned: boolean;
 
   constructor(args?: PluginOpts) {
-    this._emit = true;
-    this.options = merge(
+    this.isRunned = false;
+    this.options = deepMerge(
       {
         publicPath: '/',
         emitMetadata: true,
-        htmlPlugin: null,
         manifest: {
           filename: 'manifest.json',
           outputPath: '/',
-          options: {
-            lang: 'en',
-            dir: 'auto',
-            name: null,
-            short_name: null,
-            description: null,
-            icons: [],
-            scope: '/',
-            start_url: '/?utm_source=homescreen',
-            display: 'standalone',
-            orientation: 'any',
-            theme_color: '#ffffff',
-            background_color: '#ffffff',
-          },
+          options: defaultManifest,
         },
         icons: {
           outputPath: '/assets/icons',
-          splashColor: '#ffffff',
+          backgroundColor: '#ffffff',
           themeColor: '#ffffff',
           use: {
             favicons: true,
@@ -305,7 +306,7 @@ class PWAPlugin {
     }
 
     // Do not emit icons during watch mode
-    if (!this._emit) return Promise.resolve();
+    if (this.isRunned) return Promise.resolve();
 
     const promises = [];
 
@@ -354,7 +355,7 @@ class PWAPlugin {
       })
     );
 
-    this._emit = false;
+    this.isRunned = true;
     return Promise.all(promises);
   }
 

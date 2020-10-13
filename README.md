@@ -28,9 +28,117 @@ This plugin :
 - Create the `browserconfig.xml`
 - Generates and injects the metadata to the html template file (with [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin))
 
+The generated metadata are the followings tags :
+
+```html
+<link rel="manifest" href="/manifest.json" />
+<meta name="msapplication-config" href="/browserconfig.xml" />
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/favicon-16x16.png"
+  sizes="16x16"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/favicon-32x32.png"
+  sizes="32x32"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/favicon-48x48.png"
+  sizes="48x48"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/favicon-96x96.png"
+  sizes="96x96"
+/>
+<link
+  rel="apple-touch-icon"
+  type="image/png"
+  href="/assets/icons/icons/apple-touch-icon.png"
+  sizes="180x180"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphone5-splash.png"
+  media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphone6-splash.png"
+  media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphoneplus-splash.png"
+  media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphonex-splash.png"
+  media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphonexr-splash.png"
+  media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/iphonexsmax-splash.png"
+  media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/ipad-splash.png"
+  media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/ipadpro1-splash.png"
+  media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/ipadpro2-splash.png"
+  media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="apple-touch-startup-image"
+  type="image/png"
+  href="/assets/icons/icons/ipadpro3-splash.png"
+  media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+/>
+<link
+  rel="mask-icon"
+  type="image/svg+xml"
+  href="/assets/icons/icons/safari-pinned-tab.svg"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  href="/assets/icons/icons/coast-228x228.png"
+  sizes="228x228"
+/>
+```
+
 ## Usage
 
-1. Create a configuration file at the root of your project :
+1. Create a configuration file at the root of your project with the options for your manifest file :
 
 **app.json**
 
@@ -62,6 +170,7 @@ const PWAPlugin = require('@mxjoly/pwa-webpack-plugin');
 
 const appDirectory = fs.realpathSync(process.cwd());
 const faviconPath = path.resolve(appDirectory, 'src/favicon.svg');
+const manifestOptions = require('./app.json');
 
 module.exports = {
   plugins: [
@@ -72,7 +181,7 @@ module.exports = {
       publicPath: '/',
       emitMetadata: true,
       manifest: {
-        options: {...},
+        options: manifestOptions,
       },
       icons: {
         favicon: faviconPath,
@@ -110,11 +219,11 @@ const { iconsMap } = require('@mxjoly/pwa-webpack-plugin');
 
 ### publicPath
 
-The publicPath used for script and link tags. By default `"/"`
+The publicPath used for script and link tags. By default `"/"`.
 
 ### emitMetadata
 
-Used to inject the metadata in your html template file. By default `true`
+Used to inject the metadata in your html template file. By default `true`.
 
 ### manifest
 
@@ -124,7 +233,7 @@ The filename of your manifest file. By default `"manifest.json"`.
 
 #### outputPath
 
-The output path in the public path for your manifest file. By default `"/"`.
+The output path for your manifest file from the public path. By default `"/"`.
 
 #### options
 
@@ -156,7 +265,7 @@ The resolve path to your favicon. This favicon must have an svg format to genera
 
 #### outputPath
 
-The ouput path of the icons. By default `"/assets/icons"`.
+The ouput path of the icons from the public path. By default `"/assets/icons"`.
 
 #### backgroundColor
 
@@ -164,7 +273,7 @@ The background color used for the splash icons. By default `"#ffffff"`.
 
 #### themeColor
 
-The theme color for your icons. By default `"#ffffff"`.
+The theme color for your common icons. By default `"#ffffff"`.
 
 #### use
 
