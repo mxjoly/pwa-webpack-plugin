@@ -1,6 +1,6 @@
 {
   "name": "@mxjoly/pwa-webpack-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A webpack plugin that generates your icons and metadata for your progressive web app.",
   "main": "dist/index.js",
   "author": "mxjoly <maxime.joly2808@gmail.com>",
@@ -15,7 +15,7 @@
   "homepage": "https://github.com/mxjoly/pwa-webpack-plugin#readme",
   "scripts": {
     "build": "tsc && ncp ./lib/mask.png ./dist/mask.png",
-    "deps:check": "npm-check-updates",
+    "deps:check": "ncu",
     "deps:upgrade": "ncu -i"
   },
   "dependencies": {

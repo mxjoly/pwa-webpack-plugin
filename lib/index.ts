@@ -407,12 +407,7 @@ class PWAPlugin {
               .filter(([, props]: [string, IconProps]) => props.emitTag)
               .map(([iconName, props]: [string, IconProps]) => {
                 // The path to the image
-                const href = path.join(
-                  publicPath,
-                  outputIcons,
-                  'icons',
-                  iconName
-                );
+                const href = path.join(publicPath, outputIcons, iconName);
 
                 // Default attributes for the links
                 const attributes = {
