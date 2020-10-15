@@ -192,7 +192,7 @@ The generated metadata are the following tags :
 <link
   rel="icon"
   type="image/png"
-  href="/assets/icons/icons/favicon-16x16.png"
+  href="/assets/icons/favicon-16x16.png"
   sizes="16x16"
 />
 <link
