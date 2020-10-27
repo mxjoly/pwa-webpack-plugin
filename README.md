@@ -294,4 +294,4 @@ The generated metadata are the following tags :
 
 ## License
 
-[MIT.](https://github.com/mxjoly/pwa-webpack-plugin/blob/main/LICENSE)
+[MIT.](https://github.com/mxjoly/pwa-webpack-plugin/blob/master/LICENSE)
