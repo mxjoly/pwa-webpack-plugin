@@ -5,7 +5,7 @@ import prettier from 'prettier';
 import sharp from 'sharp';
 import Jimp from 'jimp';
 import safeRequire from 'safe-require';
-import webpack, { Compiler } from 'webpack';
+import webpack, { Compiler, sources } from 'webpack';
 
 import { adjustSvg, deepMerge } from './utils';
 import { IconGroup, IconProps, PluginOpts } from './types';
@@ -50,10 +50,10 @@ const defaultManifest = {
 
 class PWAPlugin {
   options: PluginOpts;
-  isRunned: boolean;
+  hasRunned: boolean;
 
   constructor(args?: PluginOpts) {
-    this.isRunned = false;
+    this.hasRunned = false;
     this.options = deepMerge(
       {
         publicPath: '/',
@@ -83,10 +83,34 @@ class PWAPlugin {
   }
 
   /**
+   * Add an asset to the compilation
+   * @param buffer - The buffer of the asset
+   * @param relativePath - The relative path to the asset
+   * @param compilation - The webpack compilation object
+   */
+  addAssetToCompilation(
+    buffer: Buffer,
+    relativePath: string,
+    compilation: webpack.Compilation
+  ) {
+    const options = {
+      name: 'PWAPlugin',
+      stage: webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
+    };
+
+    compilation.hooks.processAssets.tapPromise(options, () => {
+      return new Promise((resolve) => {
+        compilation.emitAsset(relativePath, new sources.RawSource(buffer));
+        resolve();
+      });
+    });
+  }
+
+  /**
    * Create the manifest file
    * @param compilation - The webpack compilation
    */
-  createManifest(compilation: webpack.compilation.Compilation) {
+  createManifest(compilation: webpack.Compilation) {
     const {
       publicPath,
       manifest: { filename, outputPath: outputManifest, options },
@@ -116,19 +140,14 @@ class PWAPlugin {
     });
 
     const buffer = Buffer.from(content, 'utf-8');
-
-    // Add file to the compilation assets
-    compilation.assets[outputFile] = {
-      source: () => buffer,
-      size: () => buffer.length,
-    };
+    this.addAssetToCompilation(buffer, outputFile, compilation);
   }
 
   /**
    * Create the file browserconfig.xml for Windows 10
    * @param compilation - The webpack compilation
    */
-  createBrowserConfig(compilation: webpack.compilation.Compilation) {
+  createBrowserConfig(compilation: webpack.Compilation) {
     const {
       publicPath,
       manifest: { outputPath: outputManifest },
@@ -162,11 +181,7 @@ class PWAPlugin {
       );
 
       const buffer = Buffer.from(source, 'utf-8');
-
-      compilation.assets[outputFile] = {
-        source: () => buffer,
-        size: () => buffer.length,
-      };
+      this.addAssetToCompilation(buffer, outputFile, compilation);
     }
   }
 
@@ -175,7 +190,7 @@ class PWAPlugin {
    * @param buffer - The buffer of the favicon provided to generate the icons
    * @param group - The group of the icons to generate
    */
-  generateGroupIcons(buffer: Buffer, group: IconGroup): Promise<any>[] {
+  generateGroupIcons(buffer: Buffer, group: IconGroup): Array<Promise<any>> {
     const {
       favicon,
       outputPath,
@@ -212,6 +227,7 @@ class PWAPlugin {
               const height = props.height || props.dheight * props.ratio;
 
               // Create a background image
+              // eslint-disable-next-line no-new
               new Jimp(
                 width,
                 height,
@@ -282,7 +298,7 @@ class PWAPlugin {
    * Generate all the icons needed for the application to be supported with all platforms
    * @param compilation - The webpack compilation
    */
-  generateIcons(compilation: webpack.compilation.Compilation) {
+  generateIcons(compilation: webpack.Compilation) {
     const { favicon, use } = this.options.icons;
 
     if (!favicon || !fs.existsSync(favicon)) {
@@ -306,9 +322,9 @@ class PWAPlugin {
     }
 
     // Do not emit icons during watch mode
-    if (this.isRunned) return Promise.resolve();
+    if (this.hasRunned) return Promise.resolve();
 
-    const promises = [];
+    const promises: Array<Promise<void>> = [];
 
     promises.push(
       new Promise((resolve, reject) => {
@@ -335,10 +351,11 @@ class PWAPlugin {
                 groupPromises.forEach((promise) => {
                   promises.push(
                     Promise.resolve(promise).then(([relativePath, buffer]) => {
-                      compilation.assets[relativePath] = {
-                        source: () => buffer,
-                        size: () => buffer.length,
-                      };
+                      this.addAssetToCompilation(
+                        buffer,
+                        relativePath,
+                        compilation
+                      );
                     })
                   );
                 });
@@ -355,7 +372,7 @@ class PWAPlugin {
       })
     );
 
-    this.isRunned = true;
+    this.hasRunned = true;
     return Promise.all(promises);
   }
 
@@ -363,7 +380,7 @@ class PWAPlugin {
    * Add the metadata to the headtags of the html template file
    * @param compilation compilation - The webpack compilation
    */
-  generateMetadata(compilation: webpack.compilation.Compilation) {
+  generateMetadata(compilation: webpack.Compilation) {
     const {
       publicPath,
       manifest: { filename, outputPath: outputManifest },
@@ -443,14 +460,12 @@ class PWAPlugin {
   }
 
   apply(compiler: Compiler) {
-    compiler.hooks.emit.tap('PWAPlugin', this.createManifest.bind(this));
-    compiler.hooks.emit.tap('PWAPlugin', this.createBrowserConfig.bind(this));
-    compiler.hooks.emit.tapPromise('PWAPlugin', this.generateIcons.bind(this));
+    const compilation = compiler.hooks.thisCompilation;
+    compilation.tap('PWAPlugin', this.createManifest.bind(this));
+    compilation.tap('PWAPlugin', this.createBrowserConfig.bind(this));
+    compilation.tap('PWAPlugin', this.generateIcons.bind(this));
     if (this.options.emitMetadata) {
-      compiler.hooks.compilation.tap(
-        'PWAPlugin',
-        this.generateMetadata.bind(this)
-      );
+      compilation.tap('PWAPlugin', this.generateMetadata.bind(this));
     }
   }
 }
