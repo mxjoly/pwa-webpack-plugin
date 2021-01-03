@@ -99,7 +99,7 @@ class PWAPlugin {
     };
 
     compilation.hooks.processAssets.tapPromise(options, () => {
-      return new Promise((resolve) => {
+      return new Promise<void>((resolve) => {
         compilation.emitAsset(relativePath, new sources.RawSource(buffer));
         resolve();
       });
