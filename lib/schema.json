@@ -1,0 +1,1163 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "favicons": {
+      "type": "object",
+      "properties": {
+        "favicon-16x16.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "favicon-32x32.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "favicon-48x48.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "favicon-96x96.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        }
+      },
+      "required": [
+        "favicon-16x16.png",
+        "favicon-32x32.png",
+        "favicon-48x48.png",
+        "favicon-96x96.png"
+      ]
+    },
+    "android": {
+      "type": "object",
+      "properties": {
+        "android-chrome-128x128.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "android-chrome-128x128-maskable.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "android-chrome-192x192.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "android-chrome-192x192-maskable.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "android-chrome-512x512.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "android-chrome-512x512-maskable.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        }
+      },
+      "required": [
+        "android-chrome-128x128.png",
+        "android-chrome-128x128-maskable.png",
+        "android-chrome-192x192.png",
+        "android-chrome-192x192-maskable.png",
+        "android-chrome-512x512.png",
+        "android-chrome-512x512-maskable.png"
+      ]
+    },
+    "apple": {
+      "type": "object",
+      "properties": {
+        "apple-touch-icon.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        }
+      },
+      "required": ["apple-touch-icon.png"]
+    },
+    "appleStartup": {
+      "type": "object",
+      "properties": {
+        "iphone5-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "iphone6-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "iphoneplus-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "iphonex-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "iphonexr-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "iphonexsmax-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "ipad-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "ipadpro1-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "ipadpro2-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "ipadpro3-splash.png": {
+          "type": "object",
+          "properties": {
+            "dwidth": {
+              "type": "integer"
+            },
+            "dheight": {
+              "type": "integer"
+            },
+            "ratio": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "dwidth",
+            "dheight",
+            "ratio",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        }
+      },
+      "required": [
+        "iphone5-splash.png",
+        "iphone6-splash.png",
+        "iphoneplus-splash.png",
+        "iphonex-splash.png",
+        "iphonexr-splash.png",
+        "iphonexsmax-splash.png",
+        "ipad-splash.png",
+        "ipadpro1-splash.png",
+        "ipadpro2-splash.png",
+        "ipadpro3-splash.png"
+      ]
+    },
+    "windows": {
+      "type": "object",
+      "properties": {
+        "mstile-70x70.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "mstile-270x270.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "mstile-310x310.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        },
+        "mstile-310x150.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        }
+      },
+      "required": [
+        "mstile-70x70.png",
+        "mstile-270x270.png",
+        "mstile-310x310.png",
+        "mstile-310x150.png"
+      ]
+    },
+    "safari": {
+      "type": "object",
+      "properties": {
+        "safari-pinned-tab.svg": {
+          "type": "object",
+          "properties": {
+            "color": {
+              "type": "string"
+            },
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": ["color", "width", "height", "rel", "type", "emitTag"]
+        }
+      },
+      "required": ["safari-pinned-tab.svg"]
+    },
+    "coast": {
+      "type": "object",
+      "properties": {
+        "coast-228x228.png": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "transparent": {
+              "type": "boolean"
+            },
+            "mask": {
+              "type": "boolean"
+            },
+            "shadow": {
+              "type": "boolean"
+            },
+            "emitTag": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "width",
+            "height",
+            "rel",
+            "type",
+            "transparent",
+            "mask",
+            "shadow",
+            "emitTag"
+          ]
+        }
+      },
+      "required": ["coast-228x228.png"]
+    }
+  },
+  "required": [
+    "favicons",
+    "android",
+    "apple",
+    "appleStartup",
+    "windows",
+    "safari",
+    "coast"
+  ]
+}

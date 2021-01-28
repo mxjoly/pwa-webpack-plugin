@@ -9,20 +9,11 @@ import webpack, { Compiler, sources } from 'webpack';
 
 import { adjustSvg, deepMerge } from './utils';
 import { IconGroup, IconProps, PluginOpts } from './types';
+import { getConfigurationFile } from './configuration';
 
 const HtmlWebpackPlugin = safeRequire('../../../html-webpack-plugin');
-const customIconsConfig = safeRequire('../../../../icons.json');
 export const defaultIconsConfig = require('./icons.json');
-
-const iconsMap = customIconsConfig ? customIconsConfig : defaultIconsConfig;
-
-if (customIconsConfig) {
-  console.log(
-    chalk.green(
-      'Custom configuration file has been detected to generate the icons.'
-    )
-  );
-}
+const iconsConfig = getConfigurationFile();
 
 // Default manifest options
 const defaultManifest = {
@@ -132,7 +123,7 @@ class PWAPlugin {
     const outputFile = path.join(outputManifest, filename).slice(1); // remove the first slash
 
     // Add the icons
-    Object.entries(iconsMap.android).forEach(([iconName, props]: any) => {
+    Object.entries(iconsConfig.android).forEach(([iconName, props]: any) => {
       options.icons.push(
         Object.assign(
           {
@@ -209,7 +200,7 @@ class PWAPlugin {
       themeColor,
     } = this.options.icons;
 
-    return Object.entries(iconsMap[group]).map(
+    return Object.entries(iconsConfig[group]).map(
       ([iconName, props]: [string, IconProps]) => {
         const relativePath = path.join(outputPath, iconName);
 
@@ -431,7 +422,7 @@ class PWAPlugin {
         Object.keys(use)
           .filter((group) => use[group] === true)
           .forEach((group) => {
-            const groupLinks = Object.entries(iconsMap[group])
+            const groupLinks = Object.entries(iconsConfig[group])
               .filter(([, props]: [string, IconProps]) => props.emitTag)
               .map(([iconName, props]: [string, IconProps]) => {
                 // The path to the image
