@@ -11,7 +11,16 @@ import { adjustSvg, deepMerge } from './utils';
 import { IconGroup, IconProps, PluginOpts } from './types';
 
 const HtmlWebpackPlugin = safeRequire('../../../html-webpack-plugin');
-export const iconsMap = require('./icons.json');
+const customIconsConfig = safeRequire('../../../../icons.json');
+export const defaultIconsConfig = require('./icons.json');
+
+const iconsMap = customIconsConfig ? customIconsConfig : defaultIconsConfig;
+
+if (customIconsConfig) {
+  console.log(
+    chalk.green('Custom configuration file are detected to generate the icons.')
+  );
+}
 
 // Default manifest options
 const defaultManifest = {
