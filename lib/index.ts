@@ -18,7 +18,9 @@ const iconsMap = customIconsConfig ? customIconsConfig : defaultIconsConfig;
 
 if (customIconsConfig) {
   console.log(
-    chalk.green('Custom configuration file are detected to generate the icons.')
+    chalk.green(
+      'Custom configuration file has been detected to generate the icons.'
+    )
   );
 }
 
