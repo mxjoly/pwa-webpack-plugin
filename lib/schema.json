@@ -1,12 +1,14 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "required": ["favicons"],
+  "additionalProperties": false,
   "properties": {
     "favicons": {
       "type": "object",
+      "additionalProperties": false,
       "patternProperties": {
-        "^[\\w-_]+\\.png$": {
+        "^[A-Za-z0-9-_]+\\.png$": {
           "type": "object",
           "required": [
             "width",
@@ -54,8 +56,9 @@
     },
     "android": {
       "type": "object",
+      "additionalProperties": false,
       "patternProperties": {
-        "^[\\w-_]+\\.png$": {
+        "^[A-Za-z0-9-_]+\\.png$": {
           "type": "object",
           "required": [
             "width",
@@ -103,8 +106,9 @@
     },
     "apple": {
       "type": "object",
+      "additionalProperties": false,
       "patternProperties": {
-        "^[\\w-_]+\\.png$": {
+        "^[A-Za-z0-9-_]+\\.png$": {
           "type": "object",
           "required": [
             "width",
@@ -152,8 +156,9 @@
     },
     "appleStartup": {
       "type": "object",
+      "additionalProperties": false,
       "patternProperties": {
-        "^[\\w-_]+\\.png$": {
+        "^[A-Za-z0-9-_]+\\.png$": {
           "type": "object",
           "required": [
             "dwidth",
@@ -396,6 +401,7 @@
           "required": ["width", "height", "rel", "type", "emitTag"],
           "properties": {
             "color": {
+              "type": "string",
               "pattern": "^#([0-9abcdef]{3}|[0-9abcdef]{6})$"
             },
             "width": {
@@ -423,8 +429,9 @@
     },
     "coast": {
       "type": "object",
+      "additionalProperties": false,
       "patternProperties": {
-        "^[\\w-_]+\\.png$": {
+        "^[A-Za-z0-9-_]+\\.png$": {
           "type": "object",
           "required": [
             "width",
