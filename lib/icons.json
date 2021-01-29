@@ -182,6 +182,61 @@
       "shadow": false,
       "emitTag": true
     },
+    "iphone11-splash.png": {
+      "dwidth": 414,
+      "dheight": 896,
+      "ratio": 2,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
+      "transparent": false,
+      "mask": false,
+      "shadow": false,
+      "emitTag": true
+    },
+    "iphone11pro-splash.png": {
+      "dwidth": 375,
+      "dheight": 812,
+      "ratio": 3,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
+      "transparent": false,
+      "mask": false,
+      "shadow": false,
+      "emitTag": true
+    },
+    "iphone11max-splash.png": {
+      "dwidth": 414,
+      "dheight": 896,
+      "ratio": 3,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
+      "transparent": false,
+      "mask": false,
+      "shadow": false,
+      "emitTag": true
+    },
+    "iphone12-splash.png": {
+      "dwidth": 390,
+      "dheight": 844,
+      "ratio": 3,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
+      "transparent": false,
+      "mask": false,
+      "shadow": false,
+      "emitTag": true
+    },
+    "iphone12max-splash.png": {
+      "dwidth": 414,
+      "dheight": 896,
+      "ratio": 3,
+      "rel": "apple-touch-startup-image",
+      "type": "image/png",
+      "transparent": false,
+      "mask": false,
+      "shadow": false,
+      "emitTag": true
+    },
     "ipad-splash.png": {
       "dwidth": 768,
       "dheight": 1024,

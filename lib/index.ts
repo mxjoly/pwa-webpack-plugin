@@ -342,6 +342,7 @@ class PWAPlugin {
             // Generation of all png files
             Object.keys(use)
               .filter((group) => use[group] === true)
+              .filter((group) => iconsConfig[group])
               .forEach((group: IconGroup) => {
                 const groupPromises = this.generateGroupIcons(png, group);
 
@@ -421,6 +422,7 @@ class PWAPlugin {
         // Generate the links foreach icons
         Object.keys(use)
           .filter((group) => use[group] === true)
+          .filter((group) => iconsConfig[group])
           .forEach((group) => {
             const groupLinks = Object.entries(iconsConfig[group])
               .filter(([, props]: [string, IconProps]) => props.emitTag)
@@ -463,9 +465,16 @@ class PWAPlugin {
 
   apply(compiler: Compiler) {
     const compilation = compiler.hooks.thisCompilation;
-    compilation.tap('PWAPlugin', this.createManifest.bind(this));
-    compilation.tap('PWAPlugin', this.createBrowserConfig.bind(this));
-    compilation.tap('PWAPlugin', this.generateIcons.bind(this));
+
+    if (this.options.icons.use.android === true && iconsConfig.android)
+      compilation.tap('PWAPlugin', this.createManifest.bind(this));
+
+    if (this.options.icons.use.windows === true && iconsConfig.windows)
+      compilation.tap('PWAPlugin', this.createBrowserConfig.bind(this));
+
+    if (Object.values(this.options.icons.use).some((val) => val === true))
+      compilation.tap('PWAPlugin', this.generateIcons.bind(this));
+
     if (this.options.emitMetadata) {
       compilation.tap('PWAPlugin', this.generateMetadata.bind(this));
     }
