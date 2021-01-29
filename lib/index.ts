@@ -12,8 +12,7 @@ import { IconGroup, IconProps, PluginOpts } from './types';
 import { getConfigurationFile } from './configuration';
 
 const HtmlWebpackPlugin = safeRequire('../../../html-webpack-plugin');
-export const defaultIconsConfig = require('./icons.json');
-const iconsConfig = getConfigurationFile();
+export const defaultConfig = require('./icons.json');
 
 // Default manifest options
 const defaultManifest = {
@@ -53,9 +52,11 @@ const defaultManifest = {
 class PWAPlugin {
   options: PluginOpts;
   hasRunned: boolean;
+  config: any;
 
   constructor(args?: PluginOpts) {
     this.hasRunned = false;
+    this.config = null;
     this.options = deepMerge(
       {
         publicPath: '/',
@@ -82,6 +83,16 @@ class PWAPlugin {
       },
       args || {}
     );
+  }
+
+  /**
+   * Avoid to load the configuration file multiple times
+   */
+  getConfig() {
+    if (this.config === null) {
+      this.config = getConfigurationFile();
+    }
+    return this.config;
   }
 
   /**
@@ -119,11 +130,13 @@ class PWAPlugin {
       icons: { outputPath: outputIcons },
     } = this.options;
 
+    const config = this.getConfig();
+
     // Manifest relative path from the public path
     const outputFile = path.join(outputManifest, filename).slice(1); // remove the first slash
 
     // Add the icons
-    Object.entries(iconsConfig.android).forEach(([iconName, props]: any) => {
+    Object.entries(config.android).forEach(([iconName, props]: any) => {
       options.icons.push(
         Object.assign(
           {
@@ -200,7 +213,9 @@ class PWAPlugin {
       themeColor,
     } = this.options.icons;
 
-    return Object.entries(iconsConfig[group]).map(
+    const config = this.getConfig();
+
+    return Object.entries(config[group]).map(
       ([iconName, props]: [string, IconProps]) => {
         const relativePath = path.join(outputPath, iconName);
 
@@ -339,10 +354,12 @@ class PWAPlugin {
           .then((png: Buffer) => {
             const promises = [];
 
+            const config = this.getConfig();
+
             // Generation of all png files
             Object.keys(use)
               .filter((group) => use[group] === true)
-              .filter((group) => iconsConfig[group])
+              .filter((group) => config[group])
               .forEach((group: IconGroup) => {
                 const groupPromises = this.generateGroupIcons(png, group);
 
@@ -419,12 +436,14 @@ class PWAPlugin {
           })
         );
 
+        const config = this.getConfig();
+
         // Generate the links foreach icons
         Object.keys(use)
           .filter((group) => use[group] === true)
-          .filter((group) => iconsConfig[group])
+          .filter((group) => config[group])
           .forEach((group) => {
-            const groupLinks = Object.entries(iconsConfig[group])
+            const groupLinks = Object.entries(config[group])
               .filter(([, props]: [string, IconProps]) => props.emitTag)
               .map(([iconName, props]: [string, IconProps]) => {
                 // The path to the image
@@ -465,11 +484,12 @@ class PWAPlugin {
 
   apply(compiler: Compiler) {
     const compilation = compiler.hooks.thisCompilation;
+    const config = this.getConfig();
 
-    if (this.options.icons.use.android === true && iconsConfig.android)
+    if (this.options.icons.use.android === true && config.android)
       compilation.tap('PWAPlugin', this.createManifest.bind(this));
 
-    if (this.options.icons.use.windows === true && iconsConfig.windows)
+    if (this.options.icons.use.windows === true && config.windows)
       compilation.tap('PWAPlugin', this.createBrowserConfig.bind(this));
 
     if (Object.values(this.options.icons.use).some((val) => val === true))
