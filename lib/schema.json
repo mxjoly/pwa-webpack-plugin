@@ -21,15 +21,19 @@
           "additionalProperties": false,
           "properties": {
             "width": {
+              "type": "number",
               "enum": [16, 32, 48, 96]
             },
             "height": {
+              "type": "number",
               "enum": [16, 32, 48, 96]
             },
             "rel": {
+              "type": "string",
               "enum": ["icon"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/png"]
             },
             "transparent": {
@@ -66,15 +70,19 @@
           "additionalProperties": false,
           "properties": {
             "width": {
+              "type": "number",
               "enum": [128, 192, 196, 256, 512]
             },
             "height": {
+              "type": "number",
               "enum": [128, 192, 196, 256, 512]
             },
             "rel": {
+              "type": "string",
               "enum": ["icon"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/png"]
             },
             "transparent": {
@@ -111,15 +119,19 @@
           "additionalProperties": false,
           "properties": {
             "width": {
+              "type": "number",
               "enum": [128, 152, 167, 180]
             },
             "height": {
+              "type": "number",
               "enum": [128, 152, 167, 180]
             },
             "rel": {
+              "type": "string",
               "enum": ["apple-touch-icon"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/png"]
             },
             "transparent": {
@@ -163,12 +175,15 @@
               "type": "number"
             },
             "ratio": {
+              "type": "number",
               "enum": [1, 2, 3]
             },
             "rel": {
+              "type": "string",
               "enum": ["apple-touch-startup-image"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/png"]
             },
             "transparent": {
@@ -207,15 +222,19 @@
           "additionalProperties": false,
           "properties": {
             "width": {
+              "type": "number",
               "enum": [70]
             },
             "height": {
+              "type": "number",
               "enum": [70]
             },
             "rel": {
+              "type": "string",
               "enum": ["icon"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/png"]
             },
             "transparent": {
@@ -247,15 +266,19 @@
           "additionalProperties": false,
           "properties": {
             "width": {
+              "type": "number",
               "enum": [270]
             },
             "height": {
+              "type": "number",
               "enum": [270]
             },
             "rel": {
+              "type": "string",
               "enum": ["icon"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/png"]
             },
             "transparent": {
@@ -287,15 +310,19 @@
           "additionalProperties": false,
           "properties": {
             "width": {
+              "type": "number",
               "enum": [310]
             },
             "height": {
+              "type": "number",
               "enum": [310]
             },
             "rel": {
+              "type": "string",
               "enum": ["icon"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/png"]
             },
             "transparent": {
@@ -327,15 +354,19 @@
           "additionalProperties": false,
           "properties": {
             "width": {
+              "type": "number",
               "enum": [310]
             },
             "height": {
+              "type": "number",
               "enum": [150]
             },
             "rel": {
+              "type": "string",
               "enum": ["icon"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/png"]
             },
             "transparent": {
@@ -368,15 +399,19 @@
               "pattern": "^#([0-9abcdef]{3}|[0-9abcdef]{6})$"
             },
             "width": {
+              "type": "number",
               "enum": [16]
             },
             "height": {
+              "type": "number",
               "enum": [16]
             },
             "rel": {
+              "type": "string",
               "enum": ["mask-icon"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/svg+xml"]
             },
             "emitTag": {
@@ -404,15 +439,19 @@
           "additionalProperties": false,
           "properties": {
             "width": {
+              "type": "number",
               "enum": [228]
             },
             "height": {
+              "type": "number",
               "enum": [228]
             },
             "rel": {
+              "type": "string",
               "enum": ["icon"]
             },
             "type": {
+              "type": "string",
               "enum": ["image/png"]
             },
             "transparent": {

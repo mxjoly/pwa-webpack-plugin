@@ -5,13 +5,14 @@ import chalk from 'chalk';
 const customIconsConfig = safeRequire('../../../../icons.json');
 const defaultIconsConfig = require('./icons.json');
 
-function isValidSchema(config) {
-  return jsonschema.validate(config, require('./schema.json')).valid;
-}
-
 export function getConfigurationFile() {
   if (customIconsConfig) {
-    if (isValidSchema(customIconsConfig)) {
+    const { valid } = jsonschema.validate(
+      customIconsConfig,
+      require('./schema.json')
+    );
+
+    if (valid) {
       console.log(
         chalk.green(
           'PWA Webpack Plugin: icons.json file has been detected to generate the icons.'
