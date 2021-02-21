@@ -103,10 +103,10 @@ module.exports = {
 
 ## Icons configuration
 
-You can import the default icons configuration used by the plugin.
+You can import the icons configuration used by the plugin.
 
 ```javascript
-const { defaultConfig } = require('@mxjoly/pwa-webpack-plugin');
+const { getConfigurationFile } = require('@mxjoly/pwa-webpack-plugin');
 ```
 
 ## Options

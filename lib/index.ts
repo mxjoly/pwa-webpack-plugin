@@ -502,5 +502,4 @@ class PWAPlugin {
 }
 
 export default PWAPlugin;
-
-export { getConfigurationFile, defaultConfig };
+export { getConfigurationFile };
