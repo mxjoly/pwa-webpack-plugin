@@ -12,7 +12,7 @@ import { IconGroup, IconProps, PluginOpts } from './types';
 import { getConfigurationFile } from './configuration';
 
 const HtmlWebpackPlugin = safeRequire('../../../html-webpack-plugin');
-export const defaultConfig = require('./icons.json');
+const defaultConfig = require('./icons.json');
 
 // Default manifest options
 const defaultManifest = {
@@ -502,3 +502,5 @@ class PWAPlugin {
 }
 
 export default PWAPlugin;
+
+export { getConfigurationFile, defaultConfig };
