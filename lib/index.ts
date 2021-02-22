@@ -8,11 +8,9 @@ import safeRequire from 'safe-require';
 import webpack, { Compiler, sources } from 'webpack';
 
 import { adjustSvg, deepMerge } from './utils';
-import { IconGroup, IconProps, PluginOpts } from './types';
 import { getConfigurationFile } from './configuration';
 
 const HtmlWebpackPlugin = safeRequire('../../../html-webpack-plugin');
-const defaultConfig = require('./icons.json');
 
 // Default manifest options
 const defaultManifest = {
@@ -50,13 +48,25 @@ const defaultManifest = {
 // 12.9" iPad Pro      2048px × 2732px    2732px × 2048px    1024px × 1366px    2
 
 class PWAPlugin {
-  options: PluginOpts;
-  hasRunned: boolean;
+  options: PluginOptions;
+  cache: PluginCache;
   config: any;
 
-  constructor(args?: PluginOpts) {
-    this.hasRunned = false;
+  constructor(args?: PluginOptions) {
     this.config = null;
+    this.cache = {
+      manifest: null,
+      browserConfig: null,
+      icons: {
+        favicons: {},
+        android: {},
+        apple: {},
+        appleStartup: {},
+        windows: {},
+        safari: {},
+        coast: {},
+      },
+    };
     this.options = deepMerge(
       {
         publicPath: '/',
@@ -135,27 +145,32 @@ class PWAPlugin {
     // Manifest relative path from the public path
     const outputFile = path.join(outputManifest, filename).slice(1); // remove the first slash
 
-    // Add the icons
-    Object.entries(config.android).forEach(([iconName, props]: any) => {
-      options.icons.push(
-        Object.assign(
-          {
-            src: path.join(publicPath, outputIcons, iconName),
-            sizes: `${props.width}x${props.height}`,
-            type: 'image/png',
-          },
-          props.mask === true ? { purpose: 'maskable' } : {}
-        )
-      );
-    });
+    if (this.cache.manifest) {
+      this.addAssetToCompilation(this.cache.manifest, outputFile, compilation);
+    } else {
+      // Add the icons
+      Object.entries(config.android).forEach(([iconName, props]: any) => {
+        options.icons.push(
+          Object.assign(
+            {
+              src: path.join(publicPath, outputIcons, iconName),
+              sizes: `${props.width}x${props.height}`,
+              type: 'image/png',
+            },
+            props.mask === true ? { purpose: 'maskable' } : {}
+          )
+        );
+      });
 
-    // Manifest content
-    const content = prettier.format(JSON.stringify(options), {
-      parser: 'json',
-    });
+      // Manifest content
+      const content = prettier.format(JSON.stringify(options), {
+        parser: 'json',
+      });
 
-    const buffer = Buffer.from(content, 'utf-8');
-    this.addAssetToCompilation(buffer, outputFile, compilation);
+      const buffer = Buffer.from(content, 'utf-8');
+      this.cache.manifest = buffer;
+      this.addAssetToCompilation(buffer, outputFile, compilation);
+    }
   }
 
   /**
@@ -177,26 +192,35 @@ class PWAPlugin {
         .join(outputManifest, 'browserconfig.xml')
         .slice(1); // remove the first slash
 
-      const source = prettier.format(
-        `
-      <?xml version="1.0" encoding="utf-8"?>
-      <browserconfig>
-        <msapplication>
-          <tile>
-            <square70x70logo src="${relativePath}/mstile-70x70.png"/>
-            <square150x150logo src="${relativePath}/mstile-270x270.png"/>
-            <square310x310logo src="${relativePath}/mstile-310x310.png"/>
-            <wide310x150logo src="${relativePath}/mstile-310x150.png"/>
-            <TileColor>${themeColor}</TileColor>
-          </tile>
-        </msapplication>
-      </browserconfig>
-      `,
-        { parser: 'html' }
-      );
+      if (this.cache.browserConfig) {
+        this.addAssetToCompilation(
+          this.cache.browserConfig,
+          outputFile,
+          compilation
+        );
+      } else {
+        const source = prettier.format(
+          `
+        <?xml version="1.0" encoding="utf-8"?>
+        <browserconfig>
+          <msapplication>
+            <tile>
+              <square70x70logo src="${relativePath}/mstile-70x70.png"/>
+              <square150x150logo src="${relativePath}/mstile-270x270.png"/>
+              <square310x310logo src="${relativePath}/mstile-310x310.png"/>
+              <wide310x150logo src="${relativePath}/mstile-310x150.png"/>
+              <TileColor>${themeColor}</TileColor>
+            </tile>
+          </msapplication>
+        </browserconfig>
+        `,
+          { parser: 'html' }
+        );
 
-      const buffer = Buffer.from(source, 'utf-8');
-      this.addAssetToCompilation(buffer, outputFile, compilation);
+        const buffer = Buffer.from(source, 'utf-8');
+        this.cache.browserConfig = buffer;
+        this.addAssetToCompilation(buffer, outputFile, compilation);
+      }
     }
   }
 
@@ -221,86 +245,98 @@ class PWAPlugin {
 
         if (String(props.type) === 'image/svg+xml') {
           return new Promise((resolve, reject) => {
-            adjustSvg(fs.readFileSync(favicon), {
-              width: props.width,
-              height: props.height,
-              color: props.color,
-            })
-              .then((buffer: Buffer) => {
-                resolve([relativePath, buffer]);
+            if (this.cache.icons[group][iconName]) {
+              resolve([relativePath, this.cache.icons[group][iconName]]);
+            } else {
+              adjustSvg(fs.readFileSync(favicon), {
+                width: props.width,
+                height: props.height,
+                color: props.color,
               })
-              .catch((err) => {
-                reject(err);
-              });
+                .then((buffer: Buffer) => {
+                  this.cache.icons[group][iconName] = buffer;
+                  resolve([relativePath, buffer]);
+                })
+                .catch((error) => {
+                  reject(error);
+                });
+            }
           });
         }
 
         if (String(props.type) === 'image/png') {
           return new Promise((resolve, reject) => {
-            Jimp.read(buffer, (err, logo) => {
-              if (err) reject(err);
+            if (this.cache.icons[group][iconName]) {
+              resolve([relativePath, this.cache.icons[group][iconName]]);
+            } else {
+              Jimp.read(buffer, (err, logo) => {
+                if (err) reject(err);
 
-              const width = props.width || props.dwidth * props.ratio;
-              const height = props.height || props.dheight * props.ratio;
+                const width = props.width || props.dwidth * props.ratio;
+                const height = props.height || props.dheight * props.ratio;
 
-              // Create a background image
-              // eslint-disable-next-line no-new
-              new Jimp(
-                width,
-                height,
-                group === 'appleStartup' ? backgroundColor : themeColor,
-                async (err: Error, background: Jimp) => {
-                  if (err) reject(err);
-
-                  // Resize the logo
-                  const dim =
-                    group === 'appleStartup'
-                      ? Math.min(0.8 * width, 800)
-                      : width !== height
-                      ? Math.min(0.9 * width, 0.9 * height)
-                      : width;
-
-                  // For maskable icon, the safe area corresponds to 80% of the dim
-                  const padding = props.mask ? (7 * dim) / 20 : dim / 10; // padding for mask = dim/4 + dim/10
-                  logo.resize(dim - padding, dim - padding);
-
-                  // Position of the logo
-                  const x = (width - dim) / 2 + padding / 2;
-                  const y = (height - dim) / 2 + padding / 2;
-
-                  // Make a composite image with the background and the logo
-                  background.composite(logo, x, y, {
-                    mode: Jimp.BLEND_SOURCE_OVER,
-                    opacitySource: 1,
-                    opacityDest: props.transparent ? 0 : 1, // Transparency of the background
-                  });
-
-                  Jimp.read(path.join(__dirname, 'mask.png'), (err, mask) => {
+                // Create a background image
+                // eslint-disable-next-line no-new
+                new Jimp(
+                  width,
+                  height,
+                  group === 'appleStartup' ? backgroundColor : themeColor,
+                  async (err: Error, background: Jimp) => {
                     if (err) reject(err);
 
-                    // https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/
-                    if (props.mask === true) {
-                      mask.resize(width, height);
-                      background.mask(mask, 0, 0);
-                    }
+                    // Resize the logo
+                    const dim =
+                      group === 'appleStartup'
+                        ? Math.min(0.8 * width, 800)
+                        : width !== height
+                        ? Math.min(0.9 * width, 0.9 * height)
+                        : width;
 
-                    if (props.shadow === true) {
-                      background.shadow({
-                        size: 1.02,
-                        x: 0,
-                        y: 0,
-                        opacity: 0.5,
-                        blur: 3,
-                      });
-                    }
+                    // For maskable icon, the safe area corresponds to 80% of the dim
+                    const padding = props.mask ? (7 * dim) / 20 : dim / 10; // padding for mask = dim/4 + dim/10
+                    logo.resize(dim - padding, dim - padding);
 
-                    background.getBufferAsync(Jimp.MIME_PNG).then((buffer) => {
-                      resolve([relativePath, buffer]);
+                    // Position of the logo
+                    const x = (width - dim) / 2 + padding / 2;
+                    const y = (height - dim) / 2 + padding / 2;
+
+                    // Make a composite image with the background and the logo
+                    background.composite(logo, x, y, {
+                      mode: Jimp.BLEND_SOURCE_OVER,
+                      opacitySource: 1,
+                      opacityDest: props.transparent ? 0 : 1, // Transparency of the background
                     });
-                  });
-                }
-              );
-            });
+
+                    Jimp.read(path.join(__dirname, 'mask.png'), (err, mask) => {
+                      if (err) reject(err);
+
+                      // https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/
+                      if (props.mask === true) {
+                        mask.resize(width, height);
+                        background.mask(mask, 0, 0);
+                      }
+
+                      if (props.shadow === true) {
+                        background.shadow({
+                          size: 1.02,
+                          x: 0,
+                          y: 0,
+                          opacity: 0.5,
+                          blur: 3,
+                        });
+                      }
+
+                      background
+                        .getBufferAsync(Jimp.MIME_PNG)
+                        .then((buffer) => {
+                          this.cache.icons[group][iconName] = buffer;
+                          resolve([relativePath, buffer]);
+                        });
+                    });
+                  }
+                );
+              });
+            }
           });
         }
 
@@ -337,9 +373,6 @@ class PWAPlugin {
       );
       return Promise.resolve();
     }
-
-    // Do not emit icons during watch mode
-    if (this.hasRunned) return Promise.resolve();
 
     const promises: Array<Promise<void>> = [];
 
@@ -386,13 +419,12 @@ class PWAPlugin {
           .then(() => {
             resolve();
           })
-          .catch((err) => {
-            reject(err);
+          .catch((error) => {
+            reject(error);
           });
       })
     );
 
-    this.hasRunned = true;
     return Promise.all(promises);
   }
 
@@ -416,7 +448,6 @@ class PWAPlugin {
       return;
     }
 
-    // https://github.com/jantimon/html-webpack-plugin#events
     HtmlWebpackPlugin.getHooks(compilation).alterAssetTags.tapAsync(
       'PWAPlugin',
       (data, callback) => {
@@ -483,7 +514,7 @@ class PWAPlugin {
   }
 
   apply(compiler: Compiler) {
-    const compilation = compiler.hooks.thisCompilation;
+    const compilation = compiler.hooks.compilation;
     const config = this.getConfig();
 
     if (this.options.icons.use.android === true && config.android)
@@ -492,6 +523,7 @@ class PWAPlugin {
     if (this.options.icons.use.windows === true && config.windows)
       compilation.tap('PWAPlugin', this.createBrowserConfig.bind(this));
 
+    // eslint-disable-next-line unicorn/prefer-includes
     if (Object.values(this.options.icons.use).some((val) => val === true))
       compilation.tap('PWAPlugin', this.generateIcons.bind(this));
 

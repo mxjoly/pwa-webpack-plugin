@@ -1,5 +1,3 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-
 // https://developer.mozilla.org/fr/docs/Web/Manifest
 interface ManifestOptions {
   lang: string;
@@ -26,7 +24,7 @@ interface ManifestOptions {
   related_application?: [{ platform: string; url: string; id?: string }];
 }
 
-interface PluginOpts {
+interface PluginOptions {
   publicPath?: string;
   emitMetadata?: boolean;
   manifest?: {
@@ -52,6 +50,20 @@ interface PluginOpts {
   };
 }
 
+interface PluginCache {
+  manifest: Buffer | null;
+  browserConfig: Buffer | null;
+  icons: {
+    favicons: { [iconName: string]: Buffer };
+    android: { [iconName: string]: Buffer };
+    apple: { [iconName: string]: Buffer };
+    appleStartup: { [iconName: string]: Buffer };
+    windows: { [iconName: string]: Buffer };
+    safari: { [iconName: string]: Buffer };
+    coast: { [iconName: string]: Buffer };
+  };
+}
+
 type IconGroup =
   | 'favicons'
   | 'android'
@@ -67,7 +79,7 @@ type RelType =
   | 'apple-touch-startup-image'
   | 'shortcut icon';
 
-type MimeType = 'image/gif' | 'image/jpeg' | 'image/png' | 'image/svg+xml';
+type ImageMimeType = 'image/gif' | 'image/jpeg' | 'image/png' | 'image/svg+xml';
 
 type IconProps = {
   width?: number;
@@ -76,7 +88,7 @@ type IconProps = {
   dheight?: number;
   ratio?: number;
   rel?: RelType;
-  type?: MimeType;
+  type?: ImageMimeType;
   color?: string;
   transparent?: boolean;
   mask?: boolean;
